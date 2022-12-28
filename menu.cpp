@@ -1,10 +1,16 @@
 #include<iostream>
 #include "rlutil.h"
+#include "./validatinguser.hpp"
 #define cursor "->"
-#define usuario "EmiCastro01"
-#define pasword "AguanteBoca"
 using namespace std;
 
+bool validateUser(string username, string pswd){
+    if(validate(username, pswd) == true){
+        return true;
+    }else{
+        return false;
+    }
+}
 void showMessage(const char* message, rlutil::COLOR color){
     rlutil::setBackgroundColor(color);
     rlutil::locate(1,1);
@@ -28,6 +34,7 @@ void mostrarItem(const char* text, int posx, int posy, bool isSelected){
 void Ingresar(){
     bool cantLogIn = true;
     bool failUorPswd = false;
+    string user, psw;
     while(cantLogIn){
         string psw, user;
         rlutil::cls();
@@ -39,8 +46,8 @@ void Ingresar(){
         cin >> user;
         rlutil::locate(54,2);
         cin >> psw;
-        if(user != usuario || psw != pasword){
-           failUorPswd = true;
+        if(validateUser(user,psw) == false){
+            failUorPswd = true;
         }else{
             rlutil::cls();
             showMessage("Ingresando", rlutil::COLOR::GREEN);
