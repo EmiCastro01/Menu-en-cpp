@@ -3,6 +3,11 @@
 #include "./validatinguser.hpp"
 #define cursor "->"
 using namespace std;
+void Ayuda();
+
+void newUser(){
+    
+}
 
 bool validateUser(string username, string pswd){
     if(validate(username, pswd) == true){
@@ -11,12 +16,15 @@ bool validateUser(string username, string pswd){
         return false;
     }
 }
+
+
 void showMessage(const char* message, rlutil::COLOR color){
     rlutil::setBackgroundColor(color);
     rlutil::locate(1,1);
     cout << message;
     rlutil::setBackgroundColor(rlutil::COLOR::BLACK);
 }
+
 
 void mostrarItem(const char* text, int posx, int posy, bool isSelected){
     if(isSelected){
@@ -30,6 +38,7 @@ void mostrarItem(const char* text, int posx, int posy, bool isSelected){
         cout << text;
     }
 }
+
 
 void Ingresar(){
     bool cantLogIn = true;
@@ -57,10 +66,7 @@ void Ingresar(){
     
 }
 
-void Ayuda(){
-    rlutil::locate(1,1);
-    cout << "Something";
-}
+
 void accion(int opc){       //5->Salir, 4->Ayuda, 3->Ingresar
     switch(opc){
         case 5:
@@ -76,14 +82,19 @@ void accion(int opc){       //5->Salir, 4->Ayuda, 3->Ingresar
         break;
     }
 }
+
+
+
 int menuPrincipal(){
     int y = 3;
     while(true){
             mostrarItem("BIENVENIDOS", 40, 1, y == 1);
             mostrarItem(" ",40,2,false);
             mostrarItem("Ingresar", 40, 3, y == 3);
-            mostrarItem("Ayuda", 40, 4, y == 4);
-            mostrarItem("Salir", 40, 5, y == 5);
+            mostrarItem("Crear Usuario", 40, 4, y == 4);
+            mostrarItem("Eliminar Usuario", 40, 5, y == 5);
+            mostrarItem("Ayuda", 40, 6, y == 6);
+            mostrarItem("Salir", 40, 7, y == 7);
         rlutil::locate(37,y);
         cout << cursor;
         int key = rlutil::getkey(); 
@@ -92,7 +103,7 @@ int menuPrincipal(){
                 rlutil::locate(37,y);
                 cout << "  ";
                 y++;
-                if(y > 5) y = 5;
+                if(y > 7) y = 7;
                 break;
             case rlutil::KEY_UP :
                 rlutil::locate(37,y);
@@ -105,9 +116,21 @@ int menuPrincipal(){
 
         }
     }
-    
-
 }
+
+
+void Ayuda(){
+    rlutil::locate(1,1);
+    cout << "Los usuarios y contraseñas estan guardados en " << endl;
+    cout << "El archivo users.json";
+    rlutil::locate(20,25);
+    cout << "Pulsa cualquier boton para volver";
+    rlutil::getkey();
+    rlutil::cls();
+    accion(menuPrincipal());
+}
+
+
 
 int main(){
     rlutil::setColor(rlutil::COLOR::WHITE);
