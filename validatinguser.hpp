@@ -9,7 +9,7 @@ bool validateUser(string user){
     string text;
     string aux;
     counter = -1;
-        file.open("./base_files/usersBaseData.txt", ios::in);
+        file.open("./base_files/usersDataBase.txt", ios::in);
         while(!file.eof())  getline(file,text);
         file.close();
         bool cerrojo = false;
@@ -41,7 +41,7 @@ bool validatePasword(string pasword){
     string text2;
     string aux2;
     counter = -1;
-        file2.open("./base_files/pswdBaseData.txt", ios::in);
+        file2.open("./base_files/pswdDataBase.txt", ios::in);
        while(!file2.eof()){
 getline(file2, text2);
        }
