@@ -12,28 +12,26 @@ bool validateUser(string user){
         file.open("./base_files/usersDataBase.txt", ios::in);
         while(!file.eof())  getline(file,text);
         file.close();
-        bool cerrojo = false;
+        bool cerrojo3 = false;
         bool cerrojo4 = false;
-        if(cerrojo4) return false;
-    for(int i = 1; i < text.length(); i++){
-        cerrojo4 = true;
+    if(cerrojo4) return false;
+        for(int i = 1; i < text.length(); i++){
+            cerrojo3 = true;
         if(text[i-1] == '"'){
-            cerrojo = true; 
+            cerrojo3 = true; 
             aux = "";
         } 
         if(text[i+1] == '"'){
             aux += text[i];
-            counter ++;
-            cerrojo = false;
+            if(aux.length() > 3)counter ++;
+            cerrojo3 = false; 
         } 
-        if(cerrojo) aux += text[i];
+        if(cerrojo3) aux += text[i];
         if(aux == user){
             UserSelectedCounter[counter] = 1;
             return true;
-        }else{
-            counter ++;
         }
-    } return false;
+    } 
 }
 
 bool validatePasword(string pasword){
@@ -58,7 +56,7 @@ getline(file2, text2);
         } 
         if(text2[i+1] == '"'){
             aux2 += text2[i];
-            counter ++;
+            if(aux2.length() > 3)counter ++;
             cerrojo2 = false; 
         } 
         if(cerrojo2) aux2 += text2[i];
@@ -69,15 +67,9 @@ getline(file2, text2);
     } 
 }
 bool validate(string user, string pasword){
-    
-   if(validatePasword(pasword) == true && validateUser(user) == true && UserSelectedCounter[counter] == 1 && PaswordSelectedCounter[counter == 1]){
+   if(validatePasword(pasword) == true && validateUser(user) == true && UserSelectedCounter[counter] == 1 && PaswordSelectedCounter[counter] == 1){
     return true;
    }else{
     return false;
    }
 }
-/*int main(){
-    validate("EmiCastro01", "Boquita2001");
-    return 0;
-}
-*/
